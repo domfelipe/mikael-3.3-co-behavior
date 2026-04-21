@@ -1,3 +1,5 @@
+![Mikael — Behavioral Framework](./banner.svg)
+
 # mikael-3.3-co-behavior
 
 > What if your agent had the behavioral discipline of Claude Opus 4.7 — search-first, copyright-aware, tool-routing logic — as a reusable skill?

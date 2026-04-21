@@ -1,66 +1,63 @@
 # mikael-3.3-co-behavior
 
-A behavioral framework skill for AI agents — built from patterns observed in Claude Opus 4.7's system prompt.
+> What if your agent had the behavioral discipline of Claude Opus 4.7 — search-first, copyright-aware, tool-routing logic — as a reusable skill?
 
-## What is this?
+A behavioral framework for AI agents, adapted from the patterns I observed inside Claude Opus 4.7's system prompt.
 
-This is a skill I developed by studying the behavioral patterns, safety rules, and tool-routing logic that power Claude Opus 4.7. Rather than copying the original prompt, I extracted the underlying principles and adapted them into a modular, installable skill that any agent in the open skills ecosystem can use.
+## The idea
 
-The goal was to distill what makes a production-grade agent behave well — when to search vs. answer from memory, how to handle copyright, how to route between tools, when to create files vs. respond inline — and make those patterns reusable.
+I spent time reverse-engineering how top-tier models behave internally — not just *what* they say, but *how* they decide to say it. When to search vs. answer from memory. When to create a file vs. respond inline. How to handle copyright without breaking flow. How to route between tools without narrating the decision.
 
-## Why I built this
+These aren't magic. They're **engineering patterns**. And they're transferable.
 
-I spent time analyzing how top-tier models are configured internally and noticed that many of their behavioral patterns are transferable. Things like:
+So I extracted the principles, restructured them in my own format, and packaged them as a skill that any agent in the open skills ecosystem can install.
 
-- **Search-first discipline** — never answer present-day factual questions from training data
-- **Copyright hard limits** — 15-word max per quote, one quote per source, paraphrase by default
-- **Tool routing logic** — a clear decision tree for when to use which tool
-- **File creation triggers** — concrete rules for when output belongs in a file vs. inline chat
-- **Safety boundaries** — child safety, mental health, harmful content filters
+## What you get
 
-These aren't unique to one model. They're good engineering practices for any agentic system. So I adapted them into a skill format that works across agents.
+| Capability | Before | After |
+|------------|--------|-------|
+| **Search discipline** | Guesses from training data | Searches before every present-day factual question |
+| **Copyright** | Quotes freely, risks reproduction | 15-word max per quote, one per source, paraphrase-first |
+| **Tool routing** | Picks tools randomly or narrates the choice | Clear decision tree: MCP → file → visualizer → inline |
+| **File creation** | Creates files for everything or nothing | Concrete triggers: blog post → file, explanation → inline |
+| **Tone** | Over-formatted, bullet-heavy, robotic | Natural prose, minimal formatting, concise |
+| **Safety** | Inconsistent boundaries | Structured child safety, mental health, harmful content filters |
 
-## Installation
+## Quick install
 
 ```bash
 npx skills add domfelipe/mikael-3.3-co-behavior
 ```
 
-Or clone manually:
+That's it. The agent picks up the behavioral constraints on next load.
 
-```bash
-git clone https://github.com/domfelipe/mikael-3.3-co-behavior.git ~/.agents/skills/mikael-3.3-co-behavior
-```
+## What's inside
 
-## What's covered
+- **Core Behavior** — default stance, tone rules, refusal handling
+- **Search Policy** — when to search, how to construct queries, scaling effort to complexity
+- **Copyright Rules** — hard limits, paraphrase-first, content safety
+- **File Handling** — creation triggers, directory structure, artifact criteria
+- **Tool Routing** — decision trees for web_search, image_search, visualize, computer_use
+- **Visualizer** — 4-step routing: visual needed → MCP fit → file request → inline widget
+- **API Patterns** — Claudeception, MCP integration, context window management
+- **Memory System** — conversation search cues, past chat retrieval
 
-| Module | What it does |
-|--------|-------------|
-| Core Behavior | Default stance, tone rules, refusal handling, user wellbeing |
-| Search Policy | When to search vs. answer from knowledge, query construction, scaling effort to complexity |
-| Copyright Rules | Quotation limits, paraphrase-first, content safety filters |
-| File Handling | When to create files, directory structure, artifact triggers |
-| Tool Routing | Decision trees for web_search, image_search, visualize, computer_use |
-| Visualizer | 4-step routing: visual needed → MCP fit → file request → inline widget |
-| API Patterns | Claudeception, MCP integration, context window management |
-| Memory System | Conversation search cues, past chat retrieval patterns |
+## Who is this for?
 
-## How it works
-
-The skill uses frontmatter metadata that agents read before loading instructions. When activated, it injects behavioral constraints covering:
-
-1. **Information retrieval** — search discipline, source quality, citation format
-2. **Content creation** — file vs. inline decisions, artifact criteria, formatting rules
-3. **Safety** — harm prevention, copyright compliance, content filters
-4. **Tool selection** — priority ordering, category matching, fallback chains
+- **Agent builders** who want production-grade behavioral constraints without writing them from scratch
+- **Prompt engineers** studying how top models handle tool routing, safety, and content creation
+- **Developers** tired of agents that over-format, skip searches, or ignore copyright
+- **Curious folks** who want to peek behind the curtain of how advanced agents are configured
 
 ## Design decisions
 
-A few choices worth calling out:
+- **Adapted, not copied** — Inspired by Opus 4.7, but restructured and rewritten in my own format. The organization and emphasis reflect my own judgment.
+- **Modular** — Each section is self-contained. Agents can reference specific modules without loading everything.
+- **Practical** — Every rule maps to a concrete behavior. No abstract principles.
 
-- **Adapted, not copied** — The patterns are inspired by Opus 4.7 but restructured and rewritten in my own format. The organization, emphasis, and some rules reflect my own judgment about what matters.
-- **Modular by design** — Each section is self-contained so agents can reference specific modules without loading the full prompt.
-- **Practical over theoretical** — Every rule maps to a concrete behavior, not abstract principles.
+## Try it out
+
+Install it, load it on your agent, and notice the difference in how it handles searches, files, and formatting. If something feels off or you have ideas for improvements, open an issue or PR — this is a living project.
 
 ## Disclaimer
 

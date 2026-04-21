@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./banner.svg" alt="Mikael — Behavioral Framework" width="100%" />
+  <img src="./banner.svg" alt="MIKAEL" width="600" />
 </p>
 
 <p align="center">

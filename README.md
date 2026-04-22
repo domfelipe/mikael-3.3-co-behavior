@@ -10,9 +10,8 @@
   <a href="https://github.com/domfelipe/mikael-3.3-co-behavior/stargazers">
     <img alt="Stars" src="https://img.shields.io/github/stars/domfelipe/mikael-3.3-co-behavior?style=flat&color=ffd700&labelColor=1a1a2e" />
   </a>
-  <a href="https://github.com/domfelipe/mikael-3.3-co-behavior/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/badge/license-MIT-ffd700?style=flat&labelColor=1a1a2e" />
-  </a>
+  <img alt="Lines" src="https://img.shields.io/badge/lines-1156-ffd700?style=flat&labelColor=1a1a2e" />
+  <img alt="Modules" src="https://img.shields.io/badge/modules-11-ffd700?style=flat&labelColor=1a1a2e" />
   <img alt="Built with" src="https://img.shields.io/badge/built%20with-🇧🇷-ffd700?style=flat&labelColor=1a1a2e" />
 </p>
 
@@ -28,7 +27,9 @@ Most AI agents feel like they're guessing. They answer from training data when t
 
 I spent time reverse-engineering how **Claude Opus 4.7** behaves internally — not just *what* it says, but *how* it decides to say it. The patterns I found weren't magic. They were **engineering discipline**.
 
-So I extracted them, restructured them in my own format, and built **Mikael** — a behavioral framework skill that brings production-grade agent behavior to any system in the open skills ecosystem.
+So I extracted them, restructured them in my own format, and built **Mikael** — a **1,156-line behavioral specification** that brings production-grade agent behavior to any system in the open skills ecosystem.
+
+This isn't a summary. It's a working behavioral spec — every rule maps to a concrete decision the agent makes in real time.
 
 <br/>
 
@@ -90,35 +91,57 @@ That's it. Your agent picks up the behavioral constraints on next load.
 
 ## 📦 What's Inside
 
-| Module | What It Does |
-|--------|-------------|
-| 🧠 **Core Behavior** | Default stance, tone rules, refusal handling, user wellbeing |
-| 🔍 **Search Policy** | When to search vs. answer from memory, query construction, effort scaling |
-| 🛡️ **Copyright Rules** | Hard limits, paraphrase-first, content safety filters |
-| 📄 **File Handling** | Creation triggers, directory structure, artifact criteria |
-| 🧭 **Tool Routing** | Decision trees for web_search, image_search, visualize, computer_use |
-| 🎨 **Visualizer** | 4-step routing: visual needed → MCP fit → file request → inline widget |
-| 🔌 **API Patterns** | Claudeception, MCP integration, context window management |
-| 💭 **Memory System** | Conversation search cues, past chat retrieval patterns |
+**11 modules. 1,156 lines. Zero fluff.**
+
+| Module | What It Does | Depth |
+|--------|-------------|-------|
+| 🧠 **Core Behavior** | Default stance, tone rules, refusal handling, wellbeing | Helping postures, reframing test, escalation protocol |
+| 🔍 **Search Policy** | When to search, query construction, effort scaling | Present-tense trap, source quality tiers, snippet trap |
+| 🛡️ **Copyright** | Hard limits, paraphrase standards, self-check | 15-word limit, one-quote-per-source, displacive summary rule |
+| 📄 **File Handling** | Creation triggers, artifacts, sharing | File flow, good/bad sharing examples, skill-first rule |
+| 🧭 **Tool Routing** | Decision framework, tool-specific guidelines | Internal-first priority, call scaling, MCP registry |
+| 🎨 **Visualizer** | 4-step routing, triggers, design guidance | Category match vs style preference, spec triggers |
+| 🔌 **API Patterns** | Claudeception, MCP integration, context | Structured outputs, response handling, UI requirements |
+| 💭 **Memory System** | Conversation search, cue recognition | Linguistic signals, query construction, pagination |
+| 🛡️ **Safety** | Child safety, harmful content, mental health | Critical priority rules, disordered eating boundaries |
+| ⚖️ **Neutrality** | Evenhandedness, political neutrality, controversy | Presenting arguments, good-faith engagement |
+| 🔄 **Self-Correction** | Mistake handling, verification, failure recovery | Root cause fixes, 3-failure protocol, no shotgun debugging |
+
+<br/>
+
+## 🔬 What Makes This Different
+
+Most agent skills are checklists. This is a **behavioral specification**.
+
+| Typical Skill | Mikael |
+|---------------|--------|
+| "Search before answering" | Full policy with present-tense trap, query construction rules, source quality tiers, and the "I'm pretty sure" trap |
+| "Respect copyright" | Hard limits with examples of violations vs compliance, self-check checklist, displacive summary rule |
+| "Create files when needed" | Complete file flow, creation triggers with examples, artifact criteria, good/bad sharing patterns |
+| "Be safe" | Child safety protocol, mental health boundaries, disordered eating rules, escalation protocol |
+
+Every rule includes **concrete examples**, **edge cases**, and **decision criteria**. This is what a Senior AI Engineer would write — not a summary, a specification.
 
 <br/>
 
 ## 🎯 Who Is This For?
 
-- **Agent builders** who want production-grade behavioral constraints without writing them from scratch
+- **Agent builders** who want production-grade behavioral constraints without writing 1,000+ lines from scratch
 - **Prompt engineers** studying how top models handle tool routing, safety, and content creation
 - **Developers** tired of agents that over-format, skip searches, or ignore copyright
+- **Engineering leads** who need consistent agent behavior across their team
 - **Curious minds** who want to peek behind the curtain of how advanced agents are configured
 
 <br/>
 
 ## 🏗️ Design Philosophy
 
-> **Adapted, not copied.** Inspired by Opus 4.7, but restructured and rewritten in my own format. The organization and emphasis reflect my own judgment about what matters.
+> **Adapted, not copied.** Inspired by Opus 4.7, but restructured and rewritten in my own format. The organization, emphasis, and some rules reflect my own judgment about what matters.
 
 - **Modular** — Each section is self-contained. Agents can reference specific modules without loading everything.
 - **Practical** — Every rule maps to a concrete behavior. No abstract principles.
 - **Transferable** — These patterns work across agents, not just one model.
+- **Verifiable** — Rules include self-check mechanisms and clear pass/fail criteria.
 
 <br/>
 
@@ -153,7 +176,7 @@ If something feels off or you have ideas for improvements, **open an issue or PR
 </p>
 
 <p align="center">
-  <em>Um framework comportamental para agentes de IA, adaptado a partir dos padrões que observei dentro do system prompt do Claude Opus 4.7.</em>
+  <em>Uma especificação comportamental de 1.156 linhas para agentes de IA, adaptada a partir dos padrões que observei dentro do system prompt do Claude Opus 4.7.</em>
 </p>
 
 <br/>
@@ -210,6 +233,18 @@ Extraí os princípios, reestruturei no meu próprio formato e empacotei como um
 
 <br/>
 
+### 🔬 O Que Torna Isso Diferente
+
+A maioria das skills são checklists. Esta é uma **especificação comportamental**.
+
+Cada regra inclui **exemplos concretos**, **edge cases** e **critérios de decisão**. É o que um Senior AI Engineer escreveria — não um resumo, uma especificação.
+
+- "Buscar antes de responder" → policy completa com armadilha do tempo presente, regras de construção de queries, tiers de qualidade de fontes
+- "Respeitar copyright" → limites rígidos com exemplos de violação vs conformidade, checklist de auto-verificação
+- "Criar arquivos quando necessário" → fluxo completo, gatilhos com exemplos, critérios de artifacts, padrões bons/ruins de compartilhamento
+
+<br/>
+
 ### ⚡ Instalação Rápida
 
 ```bash
@@ -222,6 +257,8 @@ Só isso. O agente absorve as restrições comportamentais no próximo load.
 
 ### 📦 O Que Tem Dentro
 
+**11 módulos. 1.156 linhas. Zero enrolação.**
+
 | Módulo | O Que Faz |
 |--------|-----------|
 | 🧠 **Comportamento Base** | Postura padrão, regras de tom, tratamento de recusa |
@@ -232,6 +269,9 @@ Só isso. O agente absorve as restrições comportamentais no próximo load.
 | 🎨 **Visualizer** | Roteamento em 4 passos: visual → MCP → arquivo → inline |
 | 🔌 **Padrões de API** | Claudeception, integração MCP, gerenciamento de contexto |
 | 💭 **Sistema de Memória** | Cues de busca em conversas passadas, recuperação de histórico |
+| 🛡️ **Segurança** | Child safety, conteúdo nocivo, saúde mental |
+| ⚖️ **Neutralidade** | Imparcialidade, neutralidade política, controvérsias |
+| 🔄 **Auto-correção** | Tratamento de erros, verificação, recuperação de falhas |
 
 <br/>
 
@@ -239,6 +279,7 @@ Só isso. O agente absorve as restrições comportamentais no próximo load.
 
 - **Construtores de agentes** que querem restrições comportamentais de nível production
 - **Engenheiros de prompt** estudando como modelos top lidam com roteamento e segurança
+- **Líderes de engenharia** que precisam de comportamento consistente de agentes no time
 - **Desenvolvedores** cansados de agentes que formatam demais ou pulam buscas
 - **Curiosos** que querem espiar por trás das cortinas
 
@@ -251,6 +292,7 @@ Só isso. O agente absorve as restrições comportamentais no próximo load.
 - **Modular** — Cada seção é autocontida
 - **Prático** — Toda regra mapeia um comportamento concreto
 - **Transferível** — Padrões que funcionam em qualquer agente
+- **Verificável** — Regras incluem mecanismos de auto-verificação
 
 <br/>
 

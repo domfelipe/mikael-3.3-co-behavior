@@ -89,6 +89,276 @@ That's it. Your agent picks up the behavioral constraints on next load.
 
 <br/>
 
+## 🌍 Works Everywhere
+
+Mikael is a plain Markdown file with YAML frontmatter. It works with **any AI coding agent** that supports custom instructions, rules, or system prompts. No lock-in, no proprietary format.
+
+### Installation by Platform
+
+<details>
+<summary><strong>🐙 OpenCode / npx skills</strong> — Recommended</summary>
+
+```bash
+npx skills add domfelipe/mikael-3.3-co-behavior
+```
+
+Or install globally:
+
+```bash
+npx skills add domfelipe/mikael-3.3-co-behavior -g -y
+```
+
+The skill is automatically discovered and loaded by OpenCode on next session.
+
+</details>
+
+<details>
+<summary><strong>🤖 Claude Code</strong></summary>
+
+**Option A — Project-level (per repo):**
+
+```bash
+# Clone the skill into your project
+git clone https://github.com/domfelipe/mikael-3.3-co-behavior.git /tmp/mikael
+cp /tmp/mikael/SKILL.md ./CLAUDE.md
+```
+
+**Option B — Global (all projects):**
+
+```bash
+mkdir -p ~/.claude
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.claude/CLAUDE.md
+```
+
+**Option C — As a subagent:**
+
+```bash
+mkdir -p .claude/agents
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .claude/agents/mikael.md
+```
+
+Then register in `.claude/settings.json`:
+
+```json
+{
+  "agents": {
+    "mikael": {
+      "description": "Behavioral discipline inspired by Claude Opus 4.7",
+      "prompt": ".claude/agents/mikael.md"
+    }
+  }
+}
+```
+
+Invoke with: `claude -a mikael "your task"`
+
+</details>
+
+<details>
+<summary><strong>🧠 OpenAI Codex CLI</strong></summary>
+
+**Option A — Project-level:**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ./AGENTS.md
+```
+
+Codex reads `AGENTS.md` from the project root automatically on every session.
+
+**Option B — Global (all projects):**
+
+```bash
+mkdir -p ~/.codex
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.codex/AGENTS.md
+```
+
+**Option C — Custom instructions via config:**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.codex/custom-instructions.md
+```
+
+Then in `~/.codex/config.toml`:
+
+```toml
+instructions_file = "~/.codex/custom-instructions.md"
+```
+
+</details>
+
+<details>
+<summary><strong>🛠️ Aider</strong></summary>
+
+**Option A — Via `--read` flag (per session):**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ./MIKAEL.md
+aider --read MIKAEL.md
+```
+
+**Option B — Via `.aider.conf.yml` (persistent):**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ./MIKAEL.md
+```
+
+Then in `.aider.conf.yml`:
+
+```yaml
+read:
+  - MIKAEL.md
+```
+
+**Option C — Via `CONVENTIONS.md` (auto-detected):**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ./CONVENTIONS.md
+```
+
+Aider auto-detects `CONVENTIONS.md` in the repo root.
+
+</details>
+
+<details>
+<summary><strong>🔵 Continue.dev (VS Code)</strong></summary>
+
+**Option A — Local rules:**
+
+```bash
+mkdir -p .continue/rules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .continue/rules/mikael.md
+```
+
+Rules in `.continue/rules/` are automatically loaded for Agent, Chat, and Edit modes.
+
+**Option B — Via `config.yaml`:**
+
+```yaml
+rules:
+  - uses: domfelipe/mikael-3.3-co-behavior
+```
+
+**Option C — Global rules:**
+
+```bash
+mkdir -p ~/.continue/rules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.continue/rules/mikael.md
+```
+
+</details>
+
+<details>
+<summary><strong>🔴 Roo Code / Cline (VS Code)</strong></summary>
+
+**Option A — Workspace rules (`.clinerules/`):**
+
+```bash
+mkdir -p .clinerules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .clinerules/mikael.md
+```
+
+**Option B — Roo Code workspace rules (`.roo/rules/`):**
+
+```bash
+mkdir -p .roo/rules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .roo/rules/mikael.md
+```
+
+**Option C — Global rules:**
+
+```bash
+# Cline
+mkdir -p ~/.clinerules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.clinerules/mikael.md
+
+# Roo Code
+mkdir -p ~/.roo/rules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.roo/rules/mikael.md
+```
+
+</details>
+
+<details>
+<summary><strong>🟢 Cursor</strong></summary>
+
+**Option A — `.cursorrules` (project root):**
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .cursorrules
+```
+
+**Option B — `.cursor/rules/` directory:**
+
+```bash
+mkdir -p .cursor/rules
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .cursor/rules/mikael.mdc
+```
+
+**Option C — Settings → AI → Custom Instructions:**
+
+Copy the contents of `SKILL.md` and paste into Cursor's custom instructions field in Settings.
+
+</details>
+
+<details>
+<summary><strong>🟣 Windsurf</strong></summary>
+
+```bash
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .windsurfrules
+```
+
+Windsurf auto-detects `.windsurfrules` in the project root.
+
+</details>
+
+<details>
+<summary><strong>🔵 GitHub Copilot (VS Code)</strong></summary>
+
+**Option A — `.github/copilot-instructions.md`:**
+
+```bash
+mkdir -p .github
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .github/copilot-instructions.md
+```
+
+**Option B — Scoped instructions:**
+
+```bash
+mkdir -p .github/instructions
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .github/instructions/mikael.instructions.md
+```
+
+</details>
+
+<details>
+<summary><strong> OpenCode (manual install)</strong></summary>
+
+```bash
+# Global (all projects)
+mkdir -p ~/.opencode/skills/mikael-3.3-co-behavior
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > ~/.opencode/skills/mikael-3.3-co-behavior/SKILL.md
+
+# Or project-level
+mkdir -p .opencode/skills/mikael-3.3-co-behavior
+curl -sL https://raw.githubusercontent.com/domfelipe/mikael-3.3-co-behavior/main/SKILL.md > .opencode/skills/mikael-3.3-co-behavior/SKILL.md
+```
+
+</details>
+
+<br/>
+
+### Universal Manual Install
+
+If your tool isn't listed above, the pattern is always the same:
+
+1. **Download** `SKILL.md` from this repo
+2. **Place it** where your tool reads custom instructions (check your tool's docs)
+3. **Restart** your agent session
+
+The file is pure Markdown — no dependencies, no build step, no compilation.
+
+<br/>
+
 ## 📦 What's Inside
 
 **11 modules. 1,156 lines. Zero fluff.**
